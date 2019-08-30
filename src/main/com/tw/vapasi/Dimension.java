@@ -2,12 +2,13 @@ package com.tw.vapasi;
 
 import java.util.Objects;
 
-//Understands measurable extent of a particular kind.
+//Understands measurement of a particular kind.
 public class Dimension {
     private final int value;
     private final String unit;
 
-    public Dimension(int value, String unit) {
+
+    Dimension(int value, String unit) {
         this.value = value;
         this.unit = unit;
     }
@@ -23,24 +24,26 @@ public class Dimension {
         if (getClass() != obj.getClass())
             return false;
 
-        Dimension other = (Dimension)obj;
-        switch(unit) {
-            case "cm":
-                if (!other.unit.equals("m"))
-                    return false;
+        return compare((Dimension) obj);
+    }
 
-                if (value == 100 && other.value == 1)
-                    return true;
+    private Boolean compare(Dimension other) {
+        int currentUnitInCms = convert(this.unit, this.value);
+
+        int otherUnitInCms = convert(other.unit, other.value);
+
+        return currentUnitInCms == otherUnitInCms;
+    }
+
+    private int convert(String unit, int value) {
+        switch (unit) {
+            case "m":
+                return value * 100;
 
             case "km":
-                if (!other.unit.equals("m"))
-                    return false;
-
-                if (value == 1 && other.value == 1000)
-                    return true;
+                return value * 100000;
         }
-
-        return false;
+        return value;
     }
 
     @Override

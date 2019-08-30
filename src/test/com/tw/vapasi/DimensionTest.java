@@ -1,29 +1,69 @@
 package com.tw.vapasi;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DimensionTest {
+    @Nested
+    class BasicEqualsTest {
+        @Test
+        void expectTrueWhenBothDimensionsAreSame() {
+            Dimension centimeter100 = new Dimension(100, "cm");
+
+            boolean areEqual = centimeter100.equals(centimeter100);
+
+            assertTrue(areEqual);
+        }
+
+        @Test
+        void expectFalseWhenSecondDimensionIsNull() {
+            Dimension centimeter100 = new Dimension(100, "cm");
+
+            boolean areEqual = centimeter100.equals(null);
+
+            assertFalse(areEqual);
+        }
+
+        @Test
+        void expectFalseWhenBothDimensionAreOfDifferentType() {
+            Dimension centimeter100 = new Dimension(100, "cm");
+
+            boolean areEqual = centimeter100.equals(new String());
+
+            assertFalse(areEqual);
+        }
+    }
+
     @Test
     void expect100CmAnd1MeterAreEqual() {
-        Dimension centimeter = new Dimension(100, "cm");
-        Dimension meter = new Dimension(1, "m");
+        Dimension centimeter100 = new Dimension(100, "cm");
+        Dimension meter1 = new Dimension(1, "m");
 
-        boolean areEqual = centimeter.equals(meter);
+        boolean areEqual = centimeter100.equals(meter1);
 
         assertTrue(areEqual);
     }
 
     @Test
     void expect1KmAnd100MeterAreNotEqual() {
-        Dimension kilometer = new Dimension(1, "km");
-        Dimension meter = new Dimension(100, "m");
+        Dimension kilometer1 = new Dimension(1, "km");
+        Dimension meter100 = new Dimension(100, "m");
 
-        boolean areEqual = kilometer.equals(meter);
+        boolean areEqual = kilometer1.equals(meter100);
 
         assertFalse(areEqual);
     }
 
+    @Test
+    void expect1KmAnd100000CentiMeterAreEqual() {
+        Dimension kilometer1 = new Dimension(1, "km");
+        Dimension centimeter100000 = new Dimension(100000, "cm");
+
+        boolean areEqual = kilometer1.equals(centimeter100000);
+
+        assertTrue(areEqual);
+    }
 }
