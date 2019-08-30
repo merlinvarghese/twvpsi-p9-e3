@@ -38,53 +38,66 @@ class DimensionTest {
         }
     }
 
-    @Test
-    void expect100CmAnd1MeterAreEqual() {
-        Dimension centimeter100 = new Dimension(100, "cm");
-        Dimension meter1 = new Dimension(1, "m");
+    @Nested
+    class DimensionsComparisonTest {
+        @Test
+        void expect100CmAnd1MeterAreEqual() {
+            Dimension centimeter100 = new Dimension(100, "cm");
+            Dimension meter1 = new Dimension(1, "m");
 
-        boolean areEqual = centimeter100.equals(meter1);
+            boolean areEqual = centimeter100.equals(meter1);
 
-        assertTrue(areEqual);
-    }
+            assertTrue(areEqual);
+        }
 
-    @Test
-    void expect1KmAnd100MeterAreNotEqual() {
-        Dimension kilometer1 = new Dimension(1, "km");
-        Dimension meter100 = new Dimension(100, "m");
+        @Test
+        void expect1KmAnd100MeterAreNotEqual() {
+            Dimension kilometer1 = new Dimension(1, "km");
+            Dimension meter100 = new Dimension(100, "m");
 
-        boolean areEqual = kilometer1.equals(meter100);
+            boolean areEqual = kilometer1.equals(meter100);
 
-        assertFalse(areEqual);
-    }
+            assertFalse(areEqual);
+        }
 
-    @Test
-    void expect1KmAnd100000CentiMeterAreEqual() {
-        Dimension kilometer1 = new Dimension(1, "km");
-        Dimension centimeter100000 = new Dimension(100000, "cm");
+        @Test
+        void expect2KmAnd2000MeterAreEqual() {
+            Dimension kilometer2 = new Dimension(2, "km");
+            Dimension meter2000 = new Dimension(2000, "m");
 
-        boolean areEqual = kilometer1.equals(centimeter100000);
+            boolean areEqual = kilometer2.equals(meter2000);
 
-        assertTrue(areEqual);
-    }
+            assertTrue(areEqual);
+        }
 
-    @Test
-    void expect100000CentimeterAnd1KmAreEqual() {
-        Dimension centimeter100000 = new Dimension(100000, "cm");
-        Dimension kilometer1 = new Dimension(1, "km");
+        @Test
+        void expect1KmAnd100000CentiMeterAreEqual() {
+            Dimension kilometer1 = new Dimension(1, "km");
+            Dimension centimeter100000 = new Dimension(100000, "cm");
 
-        boolean areEqual = centimeter100000.equals(kilometer1);
+            boolean areEqual = kilometer1.equals(centimeter100000);
 
-        assertTrue(areEqual);
-    }
+            assertTrue(areEqual);
+        }
 
-    @Test
-    void expect100CentimeterAnd100CentimeterAreEqual() {
-        Dimension firstCentimeter100 = new Dimension(100, "cm");
-        Dimension secondCentimeter100 = new Dimension(100, "cm");
+        @Test
+        void expect100000CentimeterAnd1KmAreEqual() {
+            Dimension centimeter100000 = new Dimension(100000, "cm");
+            Dimension kilometer1 = new Dimension(1, "km");
 
-        boolean areEqual = firstCentimeter100.equals(secondCentimeter100);
+            boolean areEqual = centimeter100000.equals(kilometer1);
 
-        assertTrue(areEqual);
+            assertTrue(areEqual);
+        }
+
+        @Test
+        void expect100CentimeterAnd100CentimeterAreEqual() {
+            Dimension firstCentimeter100 = new Dimension(100, "cm");
+            Dimension secondCentimeter100 = new Dimension(100, "cm");
+
+            boolean areEqual = firstCentimeter100.equals(secondCentimeter100);
+
+            assertTrue(areEqual);
+        }
     }
 }

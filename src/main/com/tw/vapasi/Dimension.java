@@ -52,6 +52,7 @@ public class Dimension {
             case KILOMETER:
                 return value * CENTIMETER_EQUIVALENT_FOR_KILOMETER;
         }
+        
         return value;
     }
 }
