@@ -36,7 +36,7 @@ public class LengthDimension {
         return Objects.hash(unit, value);
     }
 
-    private Boolean compare(LengthDimension other) {
+    private boolean compare(LengthDimension other) {
         int currentUnitInCms = convert(this.unit, this.value);
 
         int otherUnitInCms = convert(other.unit, other.value);
