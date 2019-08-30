@@ -1,5 +1,7 @@
 package com.tw.vapasi;
 
+import java.util.Objects;
+
 //Understands measurable extent of a particular kind.
 public class Dimension {
     private final int value;
@@ -11,21 +13,38 @@ public class Dimension {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (this == other)
+    public boolean equals(Object obj) {
+        if (this == obj)
             return true;
 
-        if (other == null)
+        if (obj == null)
             return false;
 
-        if (getClass() != other.getClass())
+        if (getClass() != obj.getClass())
             return false;
 
-        return true;
+        Dimension other = (Dimension)obj;
+        switch(unit) {
+            case "cm":
+                if (!other.unit.equals("m"))
+                    return false;
+
+                if (value == 100 && other.value == 1)
+                    return true;
+
+            case "km":
+                if (!other.unit.equals("m"))
+                    return false;
+
+                if (value == 1 && other.value == 1000)
+                    return true;
+        }
+
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return 1;
+        return Objects.hash(value, unit);
     }
 }
