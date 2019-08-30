@@ -4,6 +4,11 @@ import java.util.Objects;
 
 //Understands measurement of a particular kind.
 public class Dimension {
+    private static final int CENTIMETER_EQUIVALENT_FOR_METER = 100;
+    private static final int CENTIMETER_EQUIVALENT_FOR_KILOMETER = 100000;
+    private static final String METER = "m";
+    private static final String KILOMETER = "km";
+
     private final int value;
     private final String unit;
 
@@ -41,11 +46,11 @@ public class Dimension {
 
     private int convert(String unit, int value) {
         switch (unit) {
-            case "m":
-                return value * 100;
+            case METER:
+                return value * CENTIMETER_EQUIVALENT_FOR_METER;
 
-            case "km":
-                return value * 100000;
+            case KILOMETER:
+                return value * CENTIMETER_EQUIVALENT_FOR_KILOMETER;
         }
         return value;
     }
