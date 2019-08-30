@@ -3,7 +3,7 @@ package com.tw.vapasi;
 import java.util.Objects;
 
 //Understands measurement of a particular kind.
-public class Dimension {
+public class LengthDimension {
     private static final int CENTIMETER_EQUIVALENT_FOR_METER = 100;
     private static final int CENTIMETER_EQUIVALENT_FOR_KILOMETER = 100000;
     private static final String METER = "m";
@@ -12,7 +12,7 @@ public class Dimension {
     private final int value;
     private final String unit;
 
-    Dimension(int value, String unit) {
+    LengthDimension(int value, String unit) {
         this.value = value;
         this.unit = unit;
     }
@@ -28,7 +28,7 @@ public class Dimension {
         if (getClass() != obj.getClass())
             return false;
 
-        return compare((Dimension) obj);
+        return compare((LengthDimension) obj);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Dimension {
         return Objects.hash(unit, value);
     }
 
-    private Boolean compare(Dimension other) {
+    private Boolean compare(LengthDimension other) {
         int currentUnitInCms = convert(this.unit, this.value);
 
         int otherUnitInCms = convert(other.unit, other.value);
@@ -52,7 +52,7 @@ public class Dimension {
             case KILOMETER:
                 return value * CENTIMETER_EQUIVALENT_FOR_KILOMETER;
         }
-        
+
         return value;
     }
 }

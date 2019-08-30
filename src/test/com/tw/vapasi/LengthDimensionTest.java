@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("ALL")
-class DimensionTest {
+class LengthDimensionTest {
     @Nested
     class BasicEqualsTest {
         @Test
         void expectTrueWhenBothDimensionsAreSame() {
-            Dimension centimeter100 = new Dimension(100, "cm");
+            LengthDimension centimeter100 = new LengthDimension(100, "cm");
 
             boolean areEqual = centimeter100.equals(centimeter100);
 
@@ -21,7 +21,7 @@ class DimensionTest {
 
         @Test
         void expectFalseWhenSecondDimensionIsNull() {
-            Dimension centimeter100 = new Dimension(100, "cm");
+            LengthDimension centimeter100 = new LengthDimension(100, "cm");
 
             boolean areEqual = centimeter100.equals(null);
 
@@ -30,7 +30,7 @@ class DimensionTest {
 
         @Test
         void expectFalseWhenBothDimensionAreOfDifferentType() {
-            Dimension centimeter100 = new Dimension(100, "cm");
+            LengthDimension centimeter100 = new LengthDimension(100, "cm");
 
             boolean areEqual = centimeter100.equals(new String());
 
@@ -42,8 +42,8 @@ class DimensionTest {
     class DimensionsComparisonTest {
         @Test
         void expect100CmAnd1MeterAreEqual() {
-            Dimension centimeter100 = new Dimension(100, "cm");
-            Dimension meter1 = new Dimension(1, "m");
+            LengthDimension centimeter100 = new LengthDimension(100, "cm");
+            LengthDimension meter1 = new LengthDimension(1, "m");
 
             boolean areEqual = centimeter100.equals(meter1);
 
@@ -52,8 +52,8 @@ class DimensionTest {
 
         @Test
         void expect1KmAnd100MeterAreNotEqual() {
-            Dimension kilometer1 = new Dimension(1, "km");
-            Dimension meter100 = new Dimension(100, "m");
+            LengthDimension kilometer1 = new LengthDimension(1, "km");
+            LengthDimension meter100 = new LengthDimension(100, "m");
 
             boolean areEqual = kilometer1.equals(meter100);
 
@@ -62,8 +62,8 @@ class DimensionTest {
 
         @Test
         void expect2KmAnd2000MeterAreEqual() {
-            Dimension kilometer2 = new Dimension(2, "km");
-            Dimension meter2000 = new Dimension(2000, "m");
+            LengthDimension kilometer2 = new LengthDimension(2, "km");
+            LengthDimension meter2000 = new LengthDimension(2000, "m");
 
             boolean areEqual = kilometer2.equals(meter2000);
 
@@ -72,8 +72,8 @@ class DimensionTest {
 
         @Test
         void expect1KmAnd100000CentiMeterAreEqual() {
-            Dimension kilometer1 = new Dimension(1, "km");
-            Dimension centimeter100000 = new Dimension(100000, "cm");
+            LengthDimension kilometer1 = new LengthDimension(1, "km");
+            LengthDimension centimeter100000 = new LengthDimension(100000, "cm");
 
             boolean areEqual = kilometer1.equals(centimeter100000);
 
@@ -82,8 +82,8 @@ class DimensionTest {
 
         @Test
         void expect100000CentimeterAnd1KmAreEqual() {
-            Dimension centimeter100000 = new Dimension(100000, "cm");
-            Dimension kilometer1 = new Dimension(1, "km");
+            LengthDimension centimeter100000 = new LengthDimension(100000, "cm");
+            LengthDimension kilometer1 = new LengthDimension(1, "km");
 
             boolean areEqual = centimeter100000.equals(kilometer1);
 
@@ -92,8 +92,8 @@ class DimensionTest {
 
         @Test
         void expect100CentimeterAnd100CentimeterAreEqual() {
-            Dimension firstCentimeter100 = new Dimension(100, "cm");
-            Dimension secondCentimeter100 = new Dimension(100, "cm");
+            LengthDimension firstCentimeter100 = new LengthDimension(100, "cm");
+            LengthDimension secondCentimeter100 = new LengthDimension(100, "cm");
 
             boolean areEqual = firstCentimeter100.equals(secondCentimeter100);
 
