@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DimensionTest {
+@SuppressWarnings("ALL")
+class DimensionTest {
     @Nested
     class BasicEqualsTest {
         @Test
@@ -63,6 +64,26 @@ public class DimensionTest {
         Dimension centimeter100000 = new Dimension(100000, "cm");
 
         boolean areEqual = kilometer1.equals(centimeter100000);
+
+        assertTrue(areEqual);
+    }
+
+    @Test
+    void expect100000CentimeterAnd1KmAreEqual() {
+        Dimension centimeter100000 = new Dimension(100000, "cm");
+        Dimension kilometer1 = new Dimension(1, "km");
+
+        boolean areEqual = centimeter100000.equals(kilometer1);
+
+        assertTrue(areEqual);
+    }
+
+    @Test
+    void expect100CentimeterAnd100CentimeterAreEqual() {
+        Dimension firstCentimeter100 = new Dimension(100, "cm");
+        Dimension secondCentimeter100 = new Dimension(100, "cm");
+
+        boolean areEqual = firstCentimeter100.equals(secondCentimeter100);
 
         assertTrue(areEqual);
     }

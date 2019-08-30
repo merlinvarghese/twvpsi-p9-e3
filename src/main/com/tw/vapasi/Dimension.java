@@ -7,7 +7,6 @@ public class Dimension {
     private final int value;
     private final String unit;
 
-
     Dimension(int value, String unit) {
         this.value = value;
         this.unit = unit;
@@ -27,6 +26,11 @@ public class Dimension {
         return compare((Dimension) obj);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(unit, value);
+    }
+
     private Boolean compare(Dimension other) {
         int currentUnitInCms = convert(this.unit, this.value);
 
@@ -44,10 +48,5 @@ public class Dimension {
                 return value * 100000;
         }
         return value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value, unit);
     }
 }
