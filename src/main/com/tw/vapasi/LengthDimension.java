@@ -4,17 +4,16 @@ import java.util.Objects;
 
 //Understands measurement of a particular kind.
 public class LengthDimension {
-    private static final int CENTIMETER_EQUIVALENT_FOR_METER = 100;
-    private static final int CENTIMETER_EQUIVALENT_FOR_KILOMETER = 100000;
-    private static final String METER = "m";
-    private static final String KILOMETER = "km";
+    private static final int CM_EQUIVALENT_FOR_M = 100;
+    private static final int CM_EQUIVALENT_FOR_KM = 100000;
 
     private final int value;
-    private final String unit;
+    private final Unit unit;
 
-    LengthDimension(int value, String unit) {
-        this.value = value;
-        this.unit = unit;
+    public enum Unit {
+        KM,
+        M,
+        CM
     }
 
     @Override
@@ -28,31 +27,41 @@ public class LengthDimension {
         if (getClass() != obj.getClass())
             return false;
 
-        return compare((LengthDimension) obj);
+        LengthDimension otherLengthDimension = (LengthDimension)obj;
+        return this.convert() == otherLengthDimension.convert();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(unit, value);
+        return Objects.hashCode(this.unit.hashCode() + this.value);
     }
 
-    private boolean compare(LengthDimension other) {
-        int currentUnitInCms = convert(this.unit, this.value);
-
-        int otherUnitInCms = convert(other.unit, other.value);
-
-        return currentUnitInCms == otherUnitInCms;
-    }
-
-    private int convert(String unit, int value) {
+    private int convert() {
         switch (unit) {
-            case METER:
-                return value * CENTIMETER_EQUIVALENT_FOR_METER;
+            case M:
+                return value * CM_EQUIVALENT_FOR_M;
 
-            case KILOMETER:
-                return value * CENTIMETER_EQUIVALENT_FOR_KILOMETER;
+            case KM:
+                return value * CM_EQUIVALENT_FOR_KM;
         }
 
         return value;
+    }
+
+    private LengthDimension(int value, Unit unit) {
+        this.value = value;
+        this.unit = unit;
+    }
+
+    static LengthDimension centimeter(int value) {
+        return new LengthDimension(value, Unit.CM);
+    }
+
+    static LengthDimension meter(int value) {
+        return new LengthDimension(value, Unit.M);
+    }
+
+    static LengthDimension kilometer(int value) {
+        return new LengthDimension(value, Unit.KM);
     }
 }

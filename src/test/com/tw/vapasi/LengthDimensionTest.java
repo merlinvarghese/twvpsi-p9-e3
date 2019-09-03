@@ -1,40 +1,32 @@
 package com.tw.vapasi;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.tw.vapasi.LengthDimension.centimeter;
+import static com.tw.vapasi.LengthDimension.kilometer;
+import static com.tw.vapasi.LengthDimension.meter;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SuppressWarnings("ALL")
 class LengthDimensionTest {
     @Nested
     class BasicEqualsTest {
         @Test
-        void expectTrueWhenBothDimensionsAreSame() {
-            LengthDimension centimeter100 = new LengthDimension(100, "cm");
-
-            boolean areEqual = centimeter100.equals(centimeter100);
-
-            assertTrue(areEqual);
+        void expect100CmsAnd100CmsAreEqual() {
+            assertEquals(centimeter(100), centimeter(100));
         }
 
         @Test
-        void expectFalseWhenSecondDimensionIsNull() {
-            LengthDimension centimeter100 = new LengthDimension(100, "cm");
-
-            boolean areEqual = centimeter100.equals(null);
-
-            assertFalse(areEqual);
+        void expect100CmsAndNullNotEqual() {
+            assertNotEquals(centimeter(100), null);
         }
 
         @Test
-        void expectFalseWhenBothDimensionAreOfDifferentType() {
-            LengthDimension centimeter100 = new LengthDimension(100, "cm");
-
-            boolean areEqual = centimeter100.equals(new String());
-
-            assertFalse(areEqual);
+        void expect100CmsAndAnotherObjectOfDifferentTypeAreNotEqual() {
+            assertNotEquals(centimeter(100), new String());
         }
     }
 
@@ -42,62 +34,32 @@ class LengthDimensionTest {
     class DimensionsComparisonTest {
         @Test
         void expect100CmAnd1MeterAreEqual() {
-            LengthDimension centimeter100 = new LengthDimension(100, "cm");
-            LengthDimension meter1 = new LengthDimension(1, "m");
-
-            boolean areEqual = centimeter100.equals(meter1);
-
-            assertTrue(areEqual);
+            assertEquals(centimeter(100), meter(1));
         }
 
         @Test
         void expect1KmAnd100MeterAreNotEqual() {
-            LengthDimension kilometer1 = new LengthDimension(1, "km");
-            LengthDimension meter100 = new LengthDimension(100, "m");
-
-            boolean areEqual = kilometer1.equals(meter100);
-
-            assertFalse(areEqual);
+            assertNotEquals(kilometer(1), meter(100));
         }
 
         @Test
         void expect2KmAnd2000MeterAreEqual() {
-            LengthDimension kilometer2 = new LengthDimension(2, "km");
-            LengthDimension meter2000 = new LengthDimension(2000, "m");
-
-            boolean areEqual = kilometer2.equals(meter2000);
-
-            assertTrue(areEqual);
+            assertEquals(kilometer(2), meter(2000));
         }
 
         @Test
         void expect1KmAnd100000CentiMeterAreEqual() {
-            LengthDimension kilometer1 = new LengthDimension(1, "km");
-            LengthDimension centimeter100000 = new LengthDimension(100000, "cm");
-
-            boolean areEqual = kilometer1.equals(centimeter100000);
-
-            assertTrue(areEqual);
+            assertEquals(kilometer(1), centimeter(100000));
         }
 
         @Test
         void expect100000CentimeterAnd1KmAreEqual() {
-            LengthDimension centimeter100000 = new LengthDimension(100000, "cm");
-            LengthDimension kilometer1 = new LengthDimension(1, "km");
-
-            boolean areEqual = centimeter100000.equals(kilometer1);
-
-            assertTrue(areEqual);
+            assertEquals(centimeter(100000), kilometer(1));
         }
 
         @Test
         void expect100CentimeterAnd100CentimeterAreEqual() {
-            LengthDimension firstCentimeter100 = new LengthDimension(100, "cm");
-            LengthDimension secondCentimeter100 = new LengthDimension(100, "cm");
-
-            boolean areEqual = firstCentimeter100.equals(secondCentimeter100);
-
-            assertTrue(areEqual);
+            assertEquals(centimeter(100), centimeter(100));
         }
     }
 }
