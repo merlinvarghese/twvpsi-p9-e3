@@ -19,6 +19,9 @@ public class LengthDimension {
             return false;
 
         LengthDimension otherLengthDimension = (LengthDimension)obj;
+        if(this.unit.equals(LengthUnit.KG) &&  !otherLengthDimension.unit.equals(LengthUnit.GM)) {
+            return false;
+        }
         return this.convertToBaseUnit() == otherLengthDimension.convertToBaseUnit();
     }
 
@@ -49,5 +52,11 @@ public class LengthDimension {
     }
     static LengthDimension inch(int value) {
         return new LengthDimension(value, LengthUnit.INCH);
+    }
+    static LengthDimension kilogram(int value) {
+        return new LengthDimension(value, LengthUnit.KG);
+    }
+    static LengthDimension gram(int value) {
+        return new LengthDimension(value, LengthUnit.GM);
     }
 }
